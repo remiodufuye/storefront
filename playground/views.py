@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+# from django.http import HttpResponse
 
 # Create your views here.
 # Views In Django Are More of a request handler , like controllers in Ruby 
@@ -7,4 +7,6 @@ from django.http import HttpResponse
 
 
 def say_hello(request):
+    x = 1
+    y = 2 
     return render(request , 'hello.html',{'name':'Remi'})
