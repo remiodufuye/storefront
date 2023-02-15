@@ -1,10 +1,13 @@
 from django.shortcuts import render
-# from django.http import HttpResponse
+from django.http import HttpResponse
 
-# Create your views here.
-# Views In Django Are More of a request handler , like controllers in Ruby 
-# request - > response
+
+def calculate():
+    x = 1
+    y = 2
+    return x
 
 
 def say_hello(request):
-    return render(request , 'hello.html',{'name':'Remi'})
+    x = calculate()
+    return render(request, 'hello.html', {'name': 'Mosh'})
