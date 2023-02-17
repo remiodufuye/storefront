@@ -3,11 +3,8 @@ from django.http import HttpResponse
 from store.models import Product
 
 
-# def calculate():
-#     x = 1
-#     y = 2
-#     return x
-
-
 def say_hello(request):
+    product = Product.objects.get(pk=10)
+    print(product)
     return render(request, 'hello.html', {'name': 'Rado'})
+
