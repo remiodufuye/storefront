@@ -1,9 +1,9 @@
 from django.shortcuts import render
 # from django.db.models import Q,F
-from store.models import Product ,OrderItem
+from store.models import Product ,Order
 
 
 def say_hello(request):
-    queryset = Product.objects.filter(id__in=OrderItem.objects.values('product_id').distinct()).order_by('title')
-    return render(request, 'hello.html', {'name': 'Rado','products':list(queryset)})
+    queryset = Order.objects.select_related('customer').order_by('-placed_at')[:5]
+    return render(request, 'hello.html', {'name': 'Rado','orders':list(queryset)})
 
