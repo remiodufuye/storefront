@@ -1,12 +1,18 @@
 
 from django.shortcuts import render
 from django.db.models import Value 
-from django.db.models.functions import Concat  
+from django.contrib.contenttypes.models import ContentType
 from store.models import Product 
-
+from tags.models import TaggedItem
 
 def say_hello(request):
+    content_type = ContentType.objects.get_for_model(Product)
 
-    queryset = Product.objects.filter(unit_price__gt=100)
-    return render(request, 'hello.html', {'name': 'Rado','result':list(queryset)})
+    queryset = TaggedItem.objects \
+        .select_related('tag') \
+        .filter(
+            content_type=content_type, 
+            object_id=1
+        )
+    return render(request, 'hello.html', {'name': 'Rado', 'tags': list(queryset)})
 
