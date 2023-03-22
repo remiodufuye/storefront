@@ -1,18 +1,10 @@
 
 from django.shortcuts import render
-from django.db.models import Value 
-from django.contrib.contenttypes.models import ContentType
-from store.models import Product 
-from tags.models import TaggedItem
+from django.db import transaction
+from store.models import Collection ,Order, OrderItem
+
 
 def say_hello(request):
-    content_type = ContentType.objects.get_for_model(Product)
-
-    queryset = TaggedItem.objects \
-        .select_related('tag') \
-        .filter(
-            content_type=content_type, 
-            object_id=1
-        )
-    return render(request, 'hello.html', {'name': 'Rado', 'tags': list(queryset)})
+    
+    return render(request, 'hello.html', {'name': 'Rado'}) 
 
